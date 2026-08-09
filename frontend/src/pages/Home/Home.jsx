@@ -120,7 +120,8 @@ const Home = () => {
         });
         
         if(response.data && response.data.note){
-            showToastMessage("Note Pinned Successfully");
+            if(!noteData.isPinned) showToastMessage("Note Pinned Successfully", "add");
+            else showToastMessage("Note Unpinned Successfully", "delete");
             getAllNotes();
         }
     } catch(error) {
