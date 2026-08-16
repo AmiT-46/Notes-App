@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-const config = require("./config.json");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
@@ -12,7 +11,8 @@ const { authenticateToken, createAccessToken } = require("./utilities");
 const app = express();
 const passwordRounds = Number.parseInt(process.env.BCRYPT_SALT_ROUNDS || "12", 10);
 
-mongoose.connect(config.connectionString).catch((error) => {
+const mongoUri = process.env.MONGODB_URI;
+mongoose.connect(mongoUri).catch((error) => {
   console.error("Database connection failed", error);
   process.exit(1);
 });
