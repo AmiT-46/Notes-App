@@ -32,7 +32,7 @@ export function TagInput({ tags, setTags }){
             {tags?.length>0 && (
                 <div className="tag-input__list">
                     {tags.map((tag,index)=>(
-                        <span key={index} className="tag-input__tag">
+                        <span key={`${tag}-${index}`} className="tag-input__tag">
                             # {tag}
                             <button
                                 className="tag-input__remove"

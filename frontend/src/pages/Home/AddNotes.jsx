@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FiFileText, FiPlus, FiX } from "react-icons/fi";
 import { TagInput } from "../../components/Input/TagInput";
-import axiosInstance from "../../utils/axiosInstance";
+import { addNote } from "../../services/notesApi";
 
-export function AddNotes({ getAllNotes, onClose, showToastMessage }) {
+export function AddNotes({ onAdded, onClose, showToastMessage }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState([]);
@@ -19,9 +19,9 @@ export function AddNotes({ getAllNotes, onClose, showToastMessage }) {
 
     try {
       setIsSaving(true);
-      const response = await axiosInstance.post("/add-note", { title: title.trim(), content: content.trim(), tags });
+      const response = await addNote({ title: title.trim(), content: content.trim(), tags });
       if (response.data?.note) {
-        await getAllNotes();
+        onAdded(response.data.note);
         showToastMessage("Note added successfully", "success");
         onClose();
       }
@@ -33,8 +33,7 @@ export function AddNotes({ getAllNotes, onClose, showToastMessage }) {
   };
 
   return (
-    <div className="note-modal-overlay">
-      <div className="note-modal" role="dialog" aria-modal="true">
+    <div>
         <form className="note-form" onSubmit={addNewNote}>
 
           <header className="note-form__header">
@@ -125,7 +124,6 @@ export function AddNotes({ getAllNotes, onClose, showToastMessage }) {
           </footer>
 
         </form>
-      </div>
     </div>
   );
 }

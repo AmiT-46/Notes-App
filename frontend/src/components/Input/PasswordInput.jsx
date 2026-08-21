@@ -1,5 +1,3 @@
-// import { FaRegEye, FaRegEyeSlash } from "react-icons"
-
 function PasswordInput({ value, onChange, placeholder }){
 
     return (

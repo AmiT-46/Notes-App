@@ -81,7 +81,6 @@ a {
 
 /* Hero */
 .hero { min-height: 100vh; background: #f8fafc; color: var(--slate-950); }
-.hero__header,
 .hero__content { width: min(100% - 48px, 1152px); margin: 0 auto; }
 .hero__header { display: flex; align-items: center; justify-content: space-between; padding: 24px 0; }
 .hero__brand { font-size: 20px; font-weight: 600; letter-spacing: -0.025em; }
@@ -137,9 +136,13 @@ a {
 
 /* Dashboard, navigation, and notes */
 .navbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; background: var(--white); padding: 16px 24px; box-shadow: 0 4px 6px -1px rgb(15 23 42 / 10%); }
-.navbar__brand { margin: 0; padding: 8px 0; color: #000; font-size: 20px; font-weight: 500; }
-.search-bar { display: flex; width: 320px; align-items: center; border-radius: 6px; background: var(--slate-100); padding: 0 16px; }
+.navbar__brand-wrap { flex: 0 0 auto; }
+.navbar__brand { display: inline-block; margin: 0; padding: 8px 0; color: #000; font-size: 20px; font-weight: 500; }
+.navbar__center { display: flex; flex: 1; justify-content: center; min-width: 0; }
+.navbar__actions { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; }
+.search-bar { display: flex; width: min(100%, 480px); align-items: center; border-radius: 6px; background: var(--slate-100); padding: 0 16px; }
 .search-bar__input { width: 100%; border: 0; background: transparent; padding: 11px 0; color: var(--slate-950); font-size: 12px; outline: 0; }
+.search-bar__input::-webkit-search-cancel-button { display: none; }
 .search-bar__button { border: 0; background: transparent; padding: 4px; color: var(--slate-500); font-size: 12px; }
 .search-bar__button:hover { color: #000; }
 .profile-info { display: flex; align-items: center; gap: 12px; }
@@ -305,16 +308,15 @@ a {
   .hero-preview { max-width: 480px; }
   .notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .navbar { flex-wrap: wrap; }
-  .search-bar { order: 3; width: 100%; }
+  .navbar__center { order: 3; flex-basis: 100%; }
+  .search-bar { width: 100%; }
   .auth-layout { grid-template-columns: 1fr; }
   .auth-layout__form-side { min-height: 100vh; padding: 28px clamp(24px, 8vw, 96px); }
   .auth-layout__visual-side { display: none; }
 }
 
 @media (max-width: 560px) {
-  .hero__header, .hero__content, .dashboard { width: min(100% - 32px, 1152px); }
-  .hero__header { padding: 16px 0; }
-  .hero__navigation { gap: 4px; }
+  .hero__content, .dashboard { width: min(100% - 32px, 1152px); }
   .button--text { padding: 8px; }
   .hero__content { gap: 36px; padding-bottom: 48px; }
   .hero__title { font-size: 36px; }

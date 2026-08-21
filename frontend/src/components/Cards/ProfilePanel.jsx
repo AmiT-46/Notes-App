@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiUser, FiLock, FiX } from "react-icons/fi";
 import PasswordInput from "../Input/PasswordInput";
-import axiosInstance from "../../utils/axiosInstance";
+import { updateProfile } from "../../services/authApi";
 
 export function ProfilePanel({ userInfo, onClose, onSaved, showToastMessage }) {
   const [fullName, setFullName] = useState(userInfo?.fullName || "");
@@ -26,7 +26,7 @@ export function ProfilePanel({ userInfo, onClose, onSaved, showToastMessage }) {
 
     try {
       setIsSaving(true);
-      const response = await axiosInstance.patch("/update-profile", payload);
+      const response = await updateProfile(payload);
       onSaved(response.data.user);
       showToastMessage("Profile updated successfully", "success");
       setCurrentPassword("");

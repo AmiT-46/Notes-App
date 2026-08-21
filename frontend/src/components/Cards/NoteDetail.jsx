@@ -1,8 +1,7 @@
 import { useState } from "react";
-import moment from "moment";
 import { FiSave, FiX } from "react-icons/fi";
 import { TagInput } from "../Input/TagInput";
-import axiosInstance from "../../utils/axiosInstance";
+import { updateNote } from "../../services/notesApi";
 
 export function NoteDetail({ note, onClose, onSaved, showToastMessage }) {
   const [title, setTitle] = useState(note?.title || "");
@@ -22,7 +21,7 @@ export function NoteDetail({ note, onClose, onSaved, showToastMessage }) {
 
     try {
       setIsSaving(true);
-      const response = await axiosInstance.put(`/edit-note/${note._id}`, { title: title.trim(), content: content.trim(), tags });
+      const response = await updateNote(note._id, { title: title.trim(), content: content.trim(), tags });
       await onSaved(response.data.note);
       showToastMessage("Note saved successfully", "success");
       onClose();
@@ -40,7 +39,7 @@ export function NoteDetail({ note, onClose, onSaved, showToastMessage }) {
         <div className="note-detail__heading">
           <p className="note-detail__eyebrow">EDITING NOTE</p>
           <input className="note-detail__title-input" value={title} onChange={(event) => setTitle(event.target.value)} aria-label="Note title" />
-          <p className="note-detail__date">Created {moment(note.createdOn).format("Do MMMM YYYY, h:mm A")}</p>
+          <p className="note-detail__date">Created {new Intl.DateTimeFormat(undefined, { dateStyle: "long", timeStyle: "short" }).format(new Date(note.createdOn))}</p>
         </div>
         <button className="icon-button" type="button" onClick={onClose} aria-label="Discard changes and close note" title="Close">
           <FiX aria-hidden="true" />

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FiAlertCircle, FiCheckCircle, FiX } from "react-icons/fi";
 
 const Toast = ({ isShown, message, type, onClose }) => {
-  const isError = type === "delete" || type === "error";
+  const isError = type === "error";
 
   useEffect(() => {
     if (!isShown) return undefined;

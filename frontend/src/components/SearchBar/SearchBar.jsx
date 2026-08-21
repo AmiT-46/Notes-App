@@ -30,7 +30,8 @@ export function SearchBar({ onSearchNote, handleClearSearch }) {
     <div className="search-bar">
       <FiSearch className="search-bar__icon" aria-hidden="true" />
       <input
-        type="search"
+        type="text"
+        role="search"
         placeholder="Search your notes"
         className="search-bar__input"
         value={searchQuery}

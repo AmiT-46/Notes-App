@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/Input/PasswordInput";
 import { validateEmail } from "../../utils/helper";
-import axiosInstance from "../../utils/axiosInstance";
+import { signUp } from "../../services/authApi";
 import authIllustration from "../../assets/auth-illustration.png";
 
 const SignUp = () => {
@@ -20,7 +20,7 @@ const SignUp = () => {
 
     try {
       setError("");
-      const response = await axiosInstance.post("/create-account", { fullName: name.trim(), email, password });
+      const response = await signUp({ fullName: name.trim(), email, password });
       if (response.data?.error) return setError(response.data.message);
       if (response.data?.accessToken) {
         localStorage.setItem("token", response.data.accessToken);
@@ -34,7 +34,6 @@ const SignUp = () => {
   return (
     <main className="auth-layout">
       <section className="auth-layout__form-side">
-        <Link to="/" className="auth-layout__brand">NOTES</Link>
         <div className="auth-layout__form-wrap">
           <p className="auth-layout__eyebrow">START ORGANIZING</p>
           <h1>Create your workspace</h1>

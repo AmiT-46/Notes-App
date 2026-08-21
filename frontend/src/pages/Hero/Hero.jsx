@@ -3,27 +3,6 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <main className="hero">
-      <header className="hero__header">
-        <Link to="/" className="hero__brand">
-          NOTES
-        </Link>
-
-        <div className="hero__navigation">
-          <Link
-            to="/login"
-            className="button button--text"
-          >
-            Log in
-          </Link>
-          <Link
-            to="/signUp"
-            className="button button--primary button--compact"
-          >
-            Sign up free
-          </Link>
-        </div>
-      </header>
-
       <section className="hero__content">
         <div className="hero__copy">
           <p className="hero__eyebrow">

@@ -1,4 +1,3 @@
-import moment from 'moment'
 import { FiBookmark, FiTrash2 } from "react-icons/fi";
 
 export function NoteCard({ title, date, content, tags, isPinned, onOpen, onDelete, onPinNote}){
@@ -20,7 +19,7 @@ export function NoteCard({ title, date, content, tags, isPinned, onOpen, onDelet
                 <div className='note-card__header'>
                     <div>
                         <h6 className='note-card__title'>{title}</h6>
-                        <span className='note-card__date'>{moment(date).format('Do MMM YYYY')}</span>
+                        <span className='note-card__date'>{new Intl.DateTimeFormat(undefined, { day: "numeric", month: "short", year: "numeric" }).format(new Date(date))}</span>
                     </div>
                     <div>
                         <button className={`note-card__icon-action ${isPinned ? "note-card__icon-action--pinned" : ""}`} onClick={(event) => keepCardClosed(event, onPinNote)} aria-label={isPinned ? "Unpin note" : "Pin note"} title={isPinned ? "Unpin note" : "Pin note"}>

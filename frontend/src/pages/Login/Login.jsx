@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/Input/PasswordInput";
 import { validateEmail } from "../../utils/helper";
-import axiosInstance from "../../utils/axiosInstance";
+import { login } from "../../services/authApi";
 import authIllustration from "../../assets/auth-illustration.png";
 
 function Login() {
@@ -18,7 +18,7 @@ function Login() {
 
     try {
       setError("");
-      const response = await axiosInstance.post("/login", { email, password });
+      const response = await login({ email, password });
       if (response.data?.accessToken) {
         localStorage.setItem("token", response.data.accessToken);
         navigate("/dashboard");
@@ -31,7 +31,6 @@ function Login() {
   return (
     <main className="auth-layout">
       <section className="auth-layout__form-side">
-        <Link to="/" className="auth-layout__brand">NOTES</Link>
         <div className="auth-layout__form-wrap">
           <p className="auth-layout__eyebrow">WELCOME BACK</p>
           <h1>Sign in to your workspace</h1>
